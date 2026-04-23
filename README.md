@@ -207,3 +207,19 @@ vendor/bin/pint
 git add .
 git commit -m "Debugbar"
 ```
+
+### Filament 5 + Panels
+
+```bash
+composer require filament/filament
+php artisan filament:install --panels
+```
+
+Escolha **admin** como nome do painel.
+
+```bash
+php artisan vendor:publish --tag=filament-config
+vendor/bin/pint
+git add .
+git commit -m "Filament 5 + Panels"
+```
