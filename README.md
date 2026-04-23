@@ -152,3 +152,36 @@ vendor/bin/pint
 git add .
 git commit -m "Larastan + Peststan"
 ```
+
+### Pest Plugin Browser
+
+```bash
+composer require pestphp/pest-plugin-browser --dev
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+npm install
+npm install playwright@latest
+npx playwright install
+npm run build
+php artisan migrate
+```
+
+Exclua o arquivo `tests\Feature\ExampleTest.php` e crie `tests\Feature\Pages\HomeTest.php` com o seguinte teste:
+
+```php
+<?php
+
+test('the home page returns a successful response', function () {
+    $url = config('app.url');
+    assert(is_string($url));
+    visit("{$url}/")->assertNoSmoke();
+});
+
+```
+
+```bash
+vendor/bin/pest
+vendor/bin/phpstan analyse
+vendor/bin/pint
+git add .
+git commit -m "Pest Plugin Browser"
+```
