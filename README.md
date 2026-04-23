@@ -223,3 +223,44 @@ vendor/bin/pint
 git add .
 git commit -m "Filament 5 + Panels"
 ```
+
+### Comportamentos globais no App Service Provider
+
+No arquivo `app/Providers/AppServiceProvider.php`, adicione as seguintes instruções:
+
+```php
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+```
+
+E então adicione ao método `boot`:
+
+```php
+// Disable mass-assignment protection globally (needed by Filament)
+Model::unguard();
+
+// Enable automatic eager loading of accessed relationships to reduce N+1 queries
+Model::automaticallyEagerLoadRelationships();
+
+// Enforce stricter model behavior in non-production (helps catch errors early)
+Model::shouldBeStrict(! $this->app->isProduction());
+
+// Block DROP/TRUNCATE/DELETE without WHERE in production for safety
+DB::prohibitDestructiveCommands($this->app->isProduction());
+
+// Force HTTPS in production
+if ($this->app->isProduction()) {
+    URL::forceScheme('https');
+}
+
+// Set Carbon default locale
+Carbon::setLocale($this->app->getLocale());
+```
+
+```bash
+vendor/bin/pint
+git add .
+git commit -m "Comportamentos globais no App Service Provider"
+```
