@@ -185,3 +185,25 @@ vendor/bin/pint
 git add .
 git commit -m "Pest Plugin Browser"
 ```
+
+### Debugbar
+
+```bash
+composer require fruitcake/laravel-debugbar --dev
+php artisan vendor:publish --provider="Fruitcake\LaravelDebugbar\ServiceProvider"
+```
+
+Crie o arquivo `storage\debugbar\.gitignore` e adicione:
+
+```yaml
+*
+!.gitignore
+```
+
+```bash
+vendor/bin/pest
+vendor/bin/phpstan analyse
+vendor/bin/pint
+git add .
+git commit -m "Debugbar"
+```
