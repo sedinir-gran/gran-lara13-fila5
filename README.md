@@ -94,3 +94,61 @@ vendor/bin/pint
 git add .
 git commit -m "Livewire 4"
 ```
+
+### Larastan + Peststan
+
+```bash
+composer require --dev "larastan/larastan"
+composer require --dev "mrpunyapal/peststan"
+```
+
+Crie o arquivo `phpstan.neon`  no diretório raiz do projeto, contendo:
+
+```yaml
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+    - ./vendor/mrpunyapal/peststan/extension.neon
+
+parameters:
+    level: 10
+    paths:
+        - app
+        - routes
+        - database
+        - resources
+        - tests
+
+    ignoreErrors:
+    
+    reportUnmatchedIgnoredErrors: false
+
+    treatPhpDocTypesAsCertain: true
+```
+
+No arquivo `tests\Pest.php` descomente na linha 18:
+
+```php
+->use(RefreshDatabase::class)
+```
+
+on line 19 add 'Unit' to the in method:
+
+```php
+->in('Feature', 'Unit');
+```
+
+on line 48 add an return void to the function:
+
+```php
+function something(): void
+```
+
+Altere o teste `tests\Unit\ExampleTest.php` para que passe no Larastan.
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Larastan + Peststan"
+```
