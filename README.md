@@ -83,3 +83,14 @@ vendor/bin/pest
 vendor/bin/pint
 git add .
 git commit -m "Laravel 13, none kit, pest, no boost, mysql"
+
+### Livewire 4
+
+```bash
+composer require livewire/livewire
+php artisan livewire:layout
+php artisan livewire:config
+vendor/bin/pint
+git add .
+git commit -m "Livewire 4"
+```
