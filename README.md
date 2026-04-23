@@ -264,3 +264,43 @@ vendor/bin/pint
 git add .
 git commit -m "Comportamentos globais no App Service Provider"
 ```
+
+### is_admin e avatar_url no User
+
+Crie o arquivo de migração `database\migrations\0001_01_01_000003_add_columns_to_users_table.php`, para adicionar as colunas 'is_admin' (boolean - default false) e 'avatar_url' (string - nullable). Crie também o arquivo de teste `tests\Feature\Database\UsersTableTest.php`.
+
+Adicione ao `app\Models\User.php` o 'avatar_url' e 'is_admin' ao array fillable e 'is_admin' à função casts como boolean. Crie também o arquivo de teste `tests\Feature\Models\UserTest.php`.
+
+Adicione ao `database\factories\UserFactory.php`, na função definition:
+
+```php
+'is_admin' => fake()->boolean(),
+'avatar_url' => fake()->imageUrl(),
+```
+
+Adicione ao `database\seeders\DatabaseSeeder.php`, na função run:
+
+```php
+User::create([
+    'name' => 'Administrador Teste',
+    'email' => 'admin@mail.com',
+    'password' => bcrypt('12345678'),
+    'is_admin' => true,
+]);
+
+User::create([
+    'name' => 'Usuário Teste',
+    'email' => 'usuario@mail.com',
+    'password' => bcrypt('12345678'),
+    'is_admin' => false,
+]);
+```
+
+```bash
+php artisan migrate:fresh --seed
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "is_admin e avatar_url no User"
+```
