@@ -356,3 +356,16 @@ vendor/bin/pint
 git add .
 git commit -m "Boost"
 ```
+
+### Localização (Português do Brasil)
+
+```bash
+php artisan lang:publish
+composer require lucascudo/laravel-pt-br-localiza --dev
+php artisan vendor:publish --tag=laravel-pt-br-localization
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Localização (Português do Brasil)"
+```
