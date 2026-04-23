@@ -335,3 +335,24 @@ vendor/bin/pint
 git add .
 git commit -m "Filament Trait"
 ```
+
+### Boost
+
+```bash
+composer require laravel/boost --dev
+php artisan boost:install
+```
+
+Escolha as seguintes opções:
+Features: guidelines,skills,mcp
+Guidelines: filament/filament
+AI: gemini
+
+```bash
+php artisan vendor:publish --tag=boost-config
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Boost"
+```
