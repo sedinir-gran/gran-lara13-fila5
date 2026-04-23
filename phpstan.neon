@@ -12,6 +12,8 @@ parameters:
         - tests
 
     ignoreErrors:
+        # ignores Mockery andReturn() method warning, that is valid in tests.
+        - '#Call to an undefined method Mockery\\ExpectationInterface|Mockery\\HigherOrderMessage::andReturn\(\)#'
  
     reportUnmatchedIgnoredErrors: false
 

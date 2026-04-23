@@ -304,3 +304,34 @@ vendor/bin/pint
 git add .
 git commit -m "is_admin e avatar_url no User"
 ```
+
+### Filament Trait
+
+Altere o arquivo `app\Models\User.php` para:
+
+```php
+use App\Traits\FilamentTrait;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+
+class User extends Authenticatable implements FilamentUser, HasAvatar
+{
+    use FilamentTrait;
+```
+
+Crie o arquivo `app/Traits/FilamentTrait.php` para o suporte do Filament. Crie também os arquivos de teste `tests\Feature\Traits\FilamentTraitTest.php` e `tests\Feature\Pages\AdminTest.php`.
+
+Adicionar ao arquivo `phpstan.neon`, na seção `ignoreErrors`, as seguintes linhas:
+
+```yaml
+# ignores Mockery andReturn() method warning, that is valid in tests.
+- '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::andReturn\(\)#'
+```
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Filament Trait"
+```
