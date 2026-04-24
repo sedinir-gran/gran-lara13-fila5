@@ -40,6 +40,16 @@ class SharedItems
                 ->label('Minha Conta')
                 ->icon('heroicon-o-user-circle')
                 ->url(fn (): string => EditProfilePage::getUrl()),
+            Action::make('home')
+                ->label(__('Home'))
+                ->icon('heroicon-o-home')
+                ->url('/'.strtolower(__('Home')))
+                ->visible(fn () => $panel_id == 'admin'),
+            Action::make('admin')
+                ->label(__('Administrator'))
+                ->icon('heroicon-o-building-library')
+                ->url('/admin')
+                ->visible(fn () => $panel_id !== 'admin' && auth()->user()?->is_admin),
         ];
     }
 }

@@ -417,3 +417,50 @@ vendor/bin/pint
 git add .
 git commit -m "Filament Edit Profile Plugin"
 ```
+
+### Home Panel
+
+```bash
+php artisan make:filament-panel home
+```
+
+Adicione em `app\Providers\Filament\HomePanelProvider.php`, após '->id('home')':
+
+```php
+->login()
+->userMenuItems([
+    ...SharedItems::menu('home'),
+    // other menu items
+])
+->plugins([
+    ...SharedItems::plugins(),
+    // other plugins
+])
+// altere o path
+->path(strtolower(__('Home')))
+```
+
+Adicione ao menu return array em `app\Providers\Filament\SharedItems.php`:
+
+```php
+Action::make('home')
+    ->label(__('Home'))
+    ->icon('heroicon-o-home')
+    ->url('/'.strtolower(__('Home')))
+    ->visible(fn () => $panel_id == 'admin'),
+Action::make('admin')
+    ->label(__('Administrator'))
+    ->icon('heroicon-o-building-library')
+    ->url('/admin')
+    ->visible(fn () => $panel_id !== 'admin' && auth()->user()?->is_admin),
+```
+
+Create also the `tests\Feature\Pages\HomeTest.php` test file.
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Home Panel"
+```
