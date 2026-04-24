@@ -56,3 +56,11 @@ it('creates an valid user using factory', function () {
         ->and($user->avatar_url)->not()->toBeNull()
         ->and($user->is_admin)->not()->toBeNull();
 });
+
+it('returns the correct title', function () {
+    $user = User::factory()->make([
+        'name' => 'John Doe',
+    ]);
+
+    expect($user->title())->toBe('John Doe');
+});

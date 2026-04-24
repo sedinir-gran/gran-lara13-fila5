@@ -35,4 +35,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             'is_admin' => 'boolean',
         ];
     }
+
+    /**
+     * Return the title shown before the avatar in the Filament top bar.
+     *
+     * Consumed by the application's `CustomizationProvider` to render the user's
+     * name as a label adjacent to their avatar in the panel navigation.
+     *
+     * @return string The user's display name.
+     */
+    public function title(): string
+    {
+        return $this->name;
+    }
 }

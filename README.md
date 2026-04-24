@@ -464,3 +464,17 @@ vendor/bin/pint
 git add .
 git commit -m "Home Panel"
 ```
+
+### User Title antes do Avatar na barra superior
+
+Crie o arquivo `app\Providers\Filament\CustomizationProvider.php` e adicione-o ao return array em `bootstrap\providers.php`.
+
+Crie uma função title() em `app\Models\User.php` para retornar uma string, adicione o teste em `tests\Feature\Models\UserTest.php`.
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "User Title antes do Avatar na barra superior"
+```
