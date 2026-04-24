@@ -387,3 +387,33 @@ vendor/bin/pint
 git add .
 git commit -m "User Resource"
 ```
+
+### Filament Edit Profile Plugin
+
+```bash
+composer require joaopaulolndev/filament-edit-profile
+php artisan vendor:publish --tag="filament-edit-profile-config"
+```
+
+Crie o arquivo `app\Providers\Filament\SharedItems.php` com uma função plugins() que retorna um array de Plugin e uma função menu(string panel_id = '') que retorna um array de Action. Crie também o arquivo de teste `tests\Feature\Pages\ProfileTest.php`.
+
+Adicione ao `app\Providers\Filament\AdminPanelProvider.php` return panel:
+
+```php
+->plugins([
+    ...SharedItems::plugins(),
+    // other plugins
+])
+->userMenuItems([
+    ...SharedItems::menu('admin'),
+    // other menu items
+])
+```
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "Filament Edit Profile Plugin"
+```

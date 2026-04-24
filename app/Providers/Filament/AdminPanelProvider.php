@@ -28,6 +28,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->plugins([
+                ...SharedItems::plugins(),
+                // other plugins
+            ])
+            ->userMenuItems([
+                ...SharedItems::menu('admin'),
+                // other menu items
+            ])
             ->colors([
                 'primary' => Color::Amber,
             ])
