@@ -369,3 +369,21 @@ vendor/bin/pint
 git add .
 git commit -m "Localização (Português do Brasil)"
 ```
+
+### User Resource
+
+```bash
+php artisan make:filament-resource User --generate --panel=admin
+```
+
+Escolha 'email' como atributo de título e não para a página de visualização.
+
+Edite os arquivos de recursos criados e crie o arquivo de teste `tests\Feature\Resources\UserResourceTest.php`.
+
+```bash
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "User Resource"
+```
