@@ -28,6 +28,74 @@ Faça login com o seu token, criado no github.
 composer global require laravel/installer
 ```
 
+## Clonando o Projeto
+
+```bash
+git clone https://github.com/sedinir-gran/gran-lara13-fila5.git
+cd gran-lara13-fila5
+composer install
+cp .env.example .env
+php artisan key:generate
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+npm install
+npm install playwright@latest
+npx playwright install
+npm run build
+php artisan migrate --seed
+php artisan ide-helper:generate
+php artisan storage:link
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+```
+
+## Mudando o Nome do Projeto e a Origem
+
+```bash
+git clone https://github.com/sedinir-gran/gran-lara13-fila5.git
+Rename-Item -Path "gran-lara13-fila5" -NewName "new-project"
+cd new-project
+git remote remove origin
+code .
+```
+
+No arquivo `.env.example` altere:
+
+```dotenv
+APP_NAME=New-Project
+
+APP_URL=http://new-project.test
+
+DB_DATABASE=new_project
+```
+
+No arquivo `composer.json` altere:
+
+```json
+"name": "seu-repositorio/new-project",
+```
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+npm install
+npm install playwright@latest
+npx playwright install
+npm run build
+php artisan migrate --seed
+php artisan ide-helper:generate
+php artisan storage:link
+vendor/bin/phpstan analyse
+vendor/bin/pest
+vendor/bin/pint
+git add .
+git commit -m "New Project"
+```
+
+Publique o projeto no seu repositório do github.
+
 ## Criando um Novo Projeto
 
 ### Instalar Laravel
@@ -106,8 +174,8 @@ Crie o arquivo `phpstan.neon`  no diretório raiz do projeto, contendo:
 
 ```yaml
 includes:
-    - ./vendor/larastan/larastan/extension.neon
-    - ./vendor/mrpunyapal/peststan/extension.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/mrpunyapal/peststan/extension.neon
 
 parameters:
     level: 10
